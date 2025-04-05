@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://eswftyy5e26e"]
+
+[ext_resource type="Script" uid="uid://l172pb1re815" path="res://scripts/actions/power.gd" id="1_futmk"]
+
+[node name="power" type="Node"]
+script = ExtResource("1_futmk")
+friendly = true
+metadata/_custom_type_script = "uid://du8rkk88tvyqs"

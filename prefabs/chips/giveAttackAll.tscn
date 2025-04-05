@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://dswkyaklq8xd2"]
+
+[ext_resource type="PackedScene" uid="uid://uae0fbdddtx8" path="res://prefabs/chip.tscn" id="1_jptfh"]
+[ext_resource type="Script" uid="uid://butrl6oj4gbrc" path="res://scripts/chips/giveAttackAll.gd" id="2_qvfh1"]
+[ext_resource type="Texture2D" uid="uid://xmcplxwlb3eg" path="res://sprites/chips.png" id="3_g065w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uiwmp"]
+atlas = ExtResource("3_g065w")
+region = Rect2(0, 34, 31, 27)
+
+[node name="giveAttackAll" instance=ExtResource("1_jptfh")]
+script = ExtResource("2_qvfh1")
+
+[node name="icon" parent="." index="0"]
+texture = SubResource("AtlasTexture_uiwmp")

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cypp58v71533p"]
+
+[ext_resource type="PackedScene" uid="uid://bxh0rk1yihren" path="res://prefabs/characterCard.tscn" id="1_7qqg1"]
+[ext_resource type="Texture2D" uid="uid://c1ay2kie5qi42" path="res://sprites/concept.png" id="2_vh3sb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gc475"]
+atlas = ExtResource("2_vh3sb")
+region = Rect2(413, 563, 40, 58)
+
+[node name="cowBoy" instance=ExtResource("1_7qqg1")]
+dmg = 2
+actions = Array[String](["attackAll"])
+
+[node name="creature" parent="." index="2"]
+texture = SubResource("AtlasTexture_gc475")

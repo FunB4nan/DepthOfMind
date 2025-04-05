@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://uae0fbdddtx8"]
+
+[ext_resource type="Texture2D" uid="uid://c1ay2kie5qi42" path="res://sprites/concept.png" id="1_1q2rn"]
+[ext_resource type="Script" uid="uid://bb0wylapthv32" path="res://scripts/chip.gd" id="2_4asax"]
+[ext_resource type="Texture2D" uid="uid://xmcplxwlb3eg" path="res://sprites/chips.png" id="3_4asax"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85g3d"]
+atlas = ExtResource("1_1q2rn")
+region = Rect2(340, 468, 53, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4woq"]
+atlas = ExtResource("3_4asax")
+region = Rect2(1, 3, 27, 27)
+
+[node name="chip" type="TextureRect"]
+offset_right = 42.0
+offset_bottom = 42.0
+texture = SubResource("AtlasTexture_85g3d")
+stretch_mode = 5
+script = ExtResource("2_4asax")
+metadata/_custom_type_script = "uid://cpymielrh087p"
+
+[node name="icon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 22.0
+offset_right = 40.0
+offset_bottom = 49.0
+texture = SubResource("AtlasTexture_h4woq")
+stretch_mode = 5

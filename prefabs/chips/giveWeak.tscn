@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://cikb5bd7c8pj2"]
+
+[ext_resource type="PackedScene" uid="uid://uae0fbdddtx8" path="res://prefabs/chip.tscn" id="1_766re"]
+[ext_resource type="Texture2D" uid="uid://xmcplxwlb3eg" path="res://sprites/chips.png" id="2_k2e2y"]
+[ext_resource type="Script" uid="uid://mtrb83rvoscq" path="res://scripts/chips/giveWeak.gd" id="2_qsdtw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsdtw"]
+atlas = ExtResource("2_k2e2y")
+region = Rect2(33, 0, 35, 27)
+
+[node name="giveWeak" instance=ExtResource("1_766re")]
+script = ExtResource("2_qsdtw")
+title = "giveWeak"
+
+[node name="icon" parent="." index="0"]
+texture = SubResource("AtlasTexture_qsdtw")

@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://bo7lctut181n7"]
+
+[ext_resource type="Script" uid="uid://biqr5cg54kugb" path="res://scripts/main.gd" id="1_jyhfs"]
+[ext_resource type="Script" uid="uid://6nike0x2aqi3" path="res://scripts/cardSlot.gd" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://crd1vlqwpnkq7" path="res://prefabs/characters/robot.tscn" id="3_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://cypp58v71533p" path="res://prefabs/characters/cowBoy.tscn" id="4_tefeu"]
+[ext_resource type="PackedScene" uid="uid://dqiqp2ek5c05a" path="res://prefabs/characters/wizard.tscn" id="5_o6xl0"]
+
+[sub_resource type="Curve" id="Curve_jyhfs"]
+_limits = [1.0, 4.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 4), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_jyhfs"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.52, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1)
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_jyhfs")
+
+[node name="team" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 163.0
+offset_top = 576.0
+offset_right = 1106.0
+offset_bottom = 679.0
+script = ExtResource("1_o5qli")
+
+[node name="robot" parent="team" instance=ExtResource("3_jyhfs")]
+layout_mode = 0
+
+[node name="cowBoy" parent="team" instance=ExtResource("4_tefeu")]
+layout_mode = 0
+
+[node name="wizard" parent="team" instance=ExtResource("5_o6xl0")]
+layout_mode = 0
+
+[node name="rewards" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 276.0
+offset_top = 281.0
+offset_right = 1058.0
+offset_bottom = 418.0
+script = ExtResource("1_o5qli")
+isReward = true
+
+[node name="enemies" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 161.0
+offset_top = 43.0
+offset_right = 1104.0
+offset_bottom = 146.0
+script = ExtResource("1_o5qli")
+
+[node name="endTurn" type="Button" parent="."]
+offset_left = 1113.0
+offset_top = 604.0
+offset_right = 1263.0
+offset_bottom = 698.0
+theme_override_font_sizes/font_size = 36
+text = "end turn"
+
+[node name="targetArrow" type="Node2D" parent="."]
+visible = false
+
+[node name="targetLine" type="Line2D" parent="targetArrow"]
+unique_name_in_owner = true
+points = PackedVector2Array(104, 0, 0, 0)
+width = 4.0
+width_curve = SubResource("Curve_jyhfs")
+gradient = SubResource("Gradient_jyhfs")
+texture_mode = 1
+
+[node name="arrow" type="Polygon2D" parent="targetArrow"]
+unique_name_in_owner = true
+position = Vector2(104, 0)
+rotation = -1.5708
+offset = Vector2(-8, 21)
+polygon = PackedVector2Array(0, 0, 20, -20, 0, -40)
+
+[connection signal="pressed" from="endTurn" to="." method="_on_end_turn_pressed"]

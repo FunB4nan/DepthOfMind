@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://4ts2lmfi1144"]
+
+[ext_resource type="PackedScene" uid="uid://uae0fbdddtx8" path="res://prefabs/chip.tscn" id="1_k8txf"]
+[ext_resource type="Texture2D" uid="uid://xmcplxwlb3eg" path="res://sprites/chips.png" id="2_7s0h8"]
+[ext_resource type="Script" uid="uid://ci6k5of5qyt7k" path="res://scripts/chips/giveHeal.gd" id="2_km500"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnaqc"]
+atlas = ExtResource("2_7s0h8")
+region = Rect2(33, 32, 29, 29)
+
+[node name="giveHeal" instance=ExtResource("1_k8txf")]
+script = ExtResource("2_km500")
+title = "giveHeal"
+
+[node name="icon" parent="." index="0"]
+texture = SubResource("AtlasTexture_jnaqc")

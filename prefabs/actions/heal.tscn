@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://n4vwh20r3gor"]
+
+[ext_resource type="Script" uid="uid://dynq0cx6kixvo" path="res://scripts/actions/heal.gd" id="1_jx0i5"]
+
+[node name="heal" type="Node"]
+script = ExtResource("1_jx0i5")
+friendly = true
+metadata/_custom_type_script = "uid://du8rkk88tvyqs"

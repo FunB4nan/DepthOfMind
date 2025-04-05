@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://jqyxxq1s1chi"]
+
+[ext_resource type="PackedScene" uid="uid://uae0fbdddtx8" path="res://prefabs/chip.tscn" id="1_evdsk"]
+[ext_resource type="Script" uid="uid://cs0xvcu3ms03v" path="res://scripts/chips/giveAttack.gd" id="2_ux4vf"]
+
+[node name="giveAttack" instance=ExtResource("1_evdsk")]
+script = ExtResource("2_ux4vf")
+title = "giveAttack"

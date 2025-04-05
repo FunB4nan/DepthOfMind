@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://df8rd1btkc65c"]
+
+[ext_resource type="PackedScene" uid="uid://uae0fbdddtx8" path="res://prefabs/chip.tscn" id="1_tfogo"]
+[ext_resource type="Script" uid="uid://cprewwxwqm0w0" path="res://scripts/chips/givePower.gd" id="2_7ndnq"]
+[ext_resource type="Texture2D" uid="uid://xmcplxwlb3eg" path="res://sprites/chips.png" id="2_sky8q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ndnq"]
+atlas = ExtResource("2_sky8q")
+region = Rect2(65, 34, 35, 27)
+
+[node name="givePower" instance=ExtResource("1_tfogo")]
+script = ExtResource("2_7ndnq")
+title = "givePower"
+
+[node name="icon" parent="." index="0"]
+texture = SubResource("AtlasTexture_7ndnq")

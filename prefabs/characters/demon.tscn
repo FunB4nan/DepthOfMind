@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://boqc7rgqp2h7o"]
+
+[ext_resource type="PackedScene" uid="uid://bxh0rk1yihren" path="res://prefabs/characterCard.tscn" id="1_qph5q"]
+[ext_resource type="Texture2D" uid="uid://c1ay2kie5qi42" path="res://sprites/concept.png" id="2_sfv1g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3nc5"]
+atlas = ExtResource("2_sfv1g")
+region = Rect2(509, 561, 40, 59)
+
+[node name="demon" instance=ExtResource("1_qph5q")]
+maxHp = 5
+actions = Array[String](["attack"])
+
+[node name="creature" parent="." index="2"]
+texture = SubResource("AtlasTexture_j3nc5")

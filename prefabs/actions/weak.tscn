@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsag0p2iodimh"]
+
+[ext_resource type="Script" uid="uid://d3ft0uxwm0450" path="res://scripts/actions/weak.gd" id="1_4jdkf"]
+
+[node name="weak" type="Node"]
+script = ExtResource("1_4jdkf")
+metadata/_custom_type_script = "uid://du8rkk88tvyqs"
