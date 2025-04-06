@@ -28,7 +28,8 @@ func _input(event: InputEvent) -> void:
 			if mouseInside:
 				state = IN_CURSOR
 				offset = global_position - event.position
-				Global.main.targetChoosen.emit(self)
+				if self is CharacterCard:
+					Global.main.targetChoosen.emit(self)
 		elif event.is_released():
 			if state == IN_CURSOR:
 				get_parent().locateObjects()

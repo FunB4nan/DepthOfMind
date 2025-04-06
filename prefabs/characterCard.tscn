@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bxh0rk1yihren"]
+[gd_scene load_steps=43 format=3 uid="uid://bxh0rk1yihren"]
 
 [ext_resource type="Shader" uid="uid://d0jxhrmcrdmly" path="res://shaders/shadow.gdshader" id="1_w3yeq"]
 [ext_resource type="Script" uid="uid://dvf0t1816y7ja" path="res://scripts/characterCard.gd" id="2_dbbfk"]
@@ -10,6 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://djsvflnfqpmyd" path="res://sprites/concept3.png" id="8_j7tqw"]
 [ext_resource type="Texture2D" uid="uid://dv61hfq3cilam" path="res://sprites/blood.png" id="9_acxbh"]
 [ext_resource type="Texture2D" uid="uid://xmcplxwlb3eg" path="res://sprites/chips.png" id="10_j7tqw"]
+[ext_resource type="AudioStream" uid="uid://d3wnw25xfjvqa" path="res://sfx/puff.mp3" id="11_trp08"]
+[ext_resource type="AudioStream" uid="uid://u3of50p1dp6h" path="res://sfx/death.mp3" id="12_m6c6r"]
+[ext_resource type="AudioStream" uid="uid://bprnh80kqba7i" path="res://sfx/heal.mp3" id="13_rvcdj"]
+[ext_resource type="AudioStream" uid="uid://b7l67y8hwp7h1" path="res://sfx/power.mp3" id="14_gnvn3"]
+[ext_resource type="AudioStream" uid="uid://bvcnkfqd2gw81" path="res://sfx/weak.mp3" id="15_edax4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u8v0d"]
 resource_local_to_scene = true
@@ -205,6 +210,54 @@ tracks/12/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("shadowCard:visible")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("shadowDmg:visible")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("shadowHeart:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("creature/shadowCreature:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_j7tqw"]
 resource_name = "appear"
@@ -304,6 +357,54 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(61, 120)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("shadowCard:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("shadowDmg:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("shadowHeart:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("creature/shadowCreature:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_6q11f"]
@@ -506,6 +607,34 @@ tracks/5/keys = {
 "update": 1,
 "values": [ExtResource("5_u8v0d")]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("creature:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_rvcdj"]
+resource_name = "drop"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("creature:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_acxbh"]
 resource_local_to_scene = true
@@ -614,6 +743,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_acxbh"]
 _data = {
 &"RESET": SubResource("Animation_u8v0d"),
+&"drop": SubResource("Animation_rvcdj"),
 &"idle": SubResource("Animation_w3yeq"),
 &"punch": SubResource("Animation_acxbh")
 }
@@ -651,6 +781,7 @@ stretch_mode = 5
 script = ExtResource("2_dbbfk")
 
 [node name="shadowCard" type="TextureRect" parent="."]
+visible = false
 show_behind_parent = true
 material = SubResource("ShaderMaterial_acxbh")
 layout_mode = 0
@@ -659,6 +790,7 @@ offset_bottom = 40.0
 texture = ExtResource("4_u8v0d")
 
 [node name="shadowDmg" type="TextureRect" parent="."]
+visible = false
 show_behind_parent = true
 material = SubResource("ShaderMaterial_u8v0d")
 layout_mode = 0
@@ -671,6 +803,7 @@ texture = SubResource("AtlasTexture_w3yeq")
 stretch_mode = 5
 
 [node name="shadowHeart" type="TextureRect" parent="."]
+visible = false
 show_behind_parent = true
 material = SubResource("ShaderMaterial_u8v0d")
 layout_mode = 0
@@ -739,6 +872,7 @@ stretch_mode = 5
 
 [node name="shadowCreature" type="TextureRect" parent="creature"]
 unique_name_in_owner = true
+visible = false
 show_behind_parent = true
 material = SubResource("ShaderMaterial_u8v0d")
 layout_mode = 0
@@ -784,7 +918,6 @@ isReward = true
 libraries = {
 &"": SubResource("AnimationLibrary_6q11f")
 }
-autoplay = "appear"
 
 [node name="anim" type="AnimationPlayer" parent="."]
 libraries = {
@@ -845,3 +978,33 @@ emission_shape = 3
 emission_rect_extents = Vector2(36.11, 1)
 gravity = Vector2(0, 100)
 scale_amount_curve = SubResource("Curve_rvcdj")
+
+[node name="death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_trp08")
+volume_db = -20.0
+bus = &"sfx"
+
+[node name="hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_m6c6r")
+volume_db = -20.0
+bus = &"sfx"
+
+[node name="heal" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_rvcdj")
+volume_db = -20.0
+bus = &"sfx"
+
+[node name="power" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_gnvn3")
+volume_db = -20.0
+bus = &"sfx"
+
+[node name="weak" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_edax4")
+volume_db = -20.0
+bus = &"sfx"
+
+[node name="appear" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_trp08")
+volume_db = -20.0
+bus = &"sfx"

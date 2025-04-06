@@ -9,6 +9,7 @@ signal actionFinished
 var target
 var value : int
 
-func act():
+func act(repeats : int):
 	actionFinished.emit()
-	queue_free()
+	if repeats == get_parent().get_parent().actionRepeats - 1:
+		queue_free()

@@ -1,5 +1,5 @@
 extends Chip
 
 func activate():
-	get_parent().get_parent().addAction("heal")
+	parent.addAction("heal")
 	super()

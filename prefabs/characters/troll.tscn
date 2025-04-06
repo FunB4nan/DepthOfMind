@@ -8,9 +8,10 @@ atlas = ExtResource("2_wj4i7")
 region = Rect2(551, 563, 44, 59)
 
 [node name="troll" instance=ExtResource("1_wj4i7")]
-maxHp = 15
+maxHp = 20
+dmg = 3
 actions = Array[String](["power", "attack"])
 title = "Paranoia"
 
-[node name="creature" parent="." index="4"]
+[node name="creature" parent="." index="7"]
 texture = SubResource("AtlasTexture_buvsy")

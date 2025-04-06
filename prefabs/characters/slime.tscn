@@ -8,8 +8,8 @@ atlas = ExtResource("2_v0dbv")
 region = Rect2(505, 642, 48, 34)
 
 [node name="slime" instance=ExtResource("1_v0dbv")]
-maxHp = 8
+maxHp = 16
 actions = Array[String](["heal", "weak"])
 
-[node name="creature" parent="." index="4"]
+[node name="creature" parent="." index="7"]
 texture = SubResource("AtlasTexture_k8xkx")

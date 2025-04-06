@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://7hxw43g0g4j5"]
+
+[ext_resource type="PackedScene" uid="uid://uae0fbdddtx8" path="res://prefabs/chip.tscn" id="1_tj350"]
+[ext_resource type="Script" uid="uid://3clb3ttlnuxq" path="res://scripts/chips/moreHP.gd" id="2_tvxg1"]
+[ext_resource type="Texture2D" uid="uid://xmcplxwlb3eg" path="res://sprites/chips.png" id="3_mmgby"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_niw3y"]
+atlas = ExtResource("3_mmgby")
+region = Rect2(75, 3, 18, 23)
+
+[node name="moreHP" instance=ExtResource("1_tj350")]
+script = ExtResource("2_tvxg1")
+title = "moreHP"
+
+[node name="icon" parent="." index="0"]
+texture = SubResource("AtlasTexture_niw3y")

@@ -5,3 +5,7 @@ giveHealDisc,Gives “heal” action
 giveWeakDisc,Gives “weak” action
 givePowerDisc,Gives “power” action
 attackAll,attack all
+moreHPDisc,Adds 4 HP
+moreDMGDisc,Adds 2 Damge
+vampireDisc,your attack will heal
+addRepeatDisc,Adds 1 repeat to your actions

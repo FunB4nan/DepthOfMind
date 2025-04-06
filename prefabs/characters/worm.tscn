@@ -8,11 +8,10 @@ atlas = ExtResource("2_sd30q")
 region = Rect2(601, 552, 67, 80)
 
 [node name="worm" instance=ExtResource("1_sd30q")]
+maxHp = 14
+dmg = 2
 actions = Array[String](["attackAll"])
 title = "Mania"
-
-[node name="appearParticles" parent="." index="3"]
-emitting = false
 
 [node name="creature" parent="." index="7"]
 texture = SubResource("AtlasTexture_1o4yw")

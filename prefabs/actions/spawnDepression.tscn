@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://7d724y4c3l85"]
+
+[ext_resource type="Script" uid="uid://dct36yah4xu6x" path="res://scripts/actions/spawnDepression.gd" id="1_a2si4"]
+
+[node name="spawnDepression" type="Node"]
+script = ExtResource("1_a2si4")
+needOneTarget = false
+friendly = true
+metadata/_custom_type_script = "uid://du8rkk88tvyqs"

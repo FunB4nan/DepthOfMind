@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlwwcb4ryt46"]
+
+[ext_resource type="PackedScene" uid="uid://uae0fbdddtx8" path="res://prefabs/chip.tscn" id="1_4vq81"]
+[ext_resource type="Script" uid="uid://vodvjvr2a1op" path="res://scripts/chips/moreDMG.gd" id="2_5vks4"]
+[ext_resource type="Texture2D" uid="uid://xmcplxwlb3eg" path="res://sprites/chips.png" id="2_p84n1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vks4"]
+atlas = ExtResource("2_p84n1")
+region = Rect2(102, 6, 37, 17)
+
+[node name="moreDMG" instance=ExtResource("1_4vq81")]
+script = ExtResource("2_5vks4")
+title = "moreDMG"
+
+[node name="icon" parent="." index="0"]
+offset_left = 8.0
+offset_top = 23.0
+offset_right = 45.0
+offset_bottom = 50.0
+texture = SubResource("AtlasTexture_5vks4")

@@ -6,10 +6,18 @@ var actionName : String = "attack"
 var initialPos : Vector2 = Vector2.ZERO
 
 func _ready() -> void:
+	var sound = AudioStreamPlayer.new()
+	sound.stream = load("res://sfx/Abstract.mp3")
+	sound.bus = "sfx"
+	add_child(sound)
 	showMe(initialPos)
 	text = tr(actionName)
-	custom_minimum_size = Vector2(100,20)
+	custom_minimum_size = Vector2(200,20)
 	pressed.connect(actionPressed)
+	mouse_entered.connect(hover)
+
+func hover():
+	get_child(0).play()
 
 func actionPressed():
 	get_parent().actionChoosen.emit()

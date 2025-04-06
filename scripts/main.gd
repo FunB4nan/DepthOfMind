@@ -42,8 +42,7 @@ func nextEncounter():
 	for card in $team.get_children():
 		card.reset()
 	for enemy in Global.encounters[Global.level]:
-		var enemyInst = load("res://prefabs/characters/%s.tscn" % enemy).instantiate()
-		$enemies.add_child(enemyInst)
+		addEnemy(enemy)
 	await get_tree().create_timer(0.5).timeout
 	Global.level += 1
 	isFighting = true
@@ -52,16 +51,37 @@ func nextEncounter():
 	giveTurn()
 	await fightEnded
 	isFighting = false
-	saySmth("Attach one of the memory chips to your ally.")
-	generateReward()
-	await chipPicked
-	for reward in $rewards.get_children():
-		reward.queue_free()
-	await hideText()
-	if Global.level < Global.encounters.size():
-		nextEncounter()
+	if $team.get_child_count() > 0:
+		saySmth("Attach one of the memory chips to your ally.")
+		generateReward()
+		await chipPicked
+		for reward in $rewards.get_children():
+			reward.queue_free()
+		await hideText()
+		$anim.play("nextEncounter")
+		await $anim.animation_finished
+		if Global.level < Global.encounters.size():
+			nextEncounter()
+		else:
+			await saySmth("You win!")
+			await hideText()
+			await saySmth("Thank you for playing! Game was made for Ludum Dare 57")
+			await hideText()
+			Global.level = 0
+			get_tree().reload_current_scene()
 	else:
-		get_tree().quit()
+		gameOver()
+
+func addEnemy(enemy : String):
+	var enemyInst = load("res://prefabs/characters/%s.tscn" % enemy).instantiate()
+	$enemies.add_child(enemyInst)
+
+func gameOver():
+	$background.stop()
+	await saySmth("Click to try again")
+	await hideText()
+	Global.level = 0
+	get_tree().reload_current_scene()
 
 func saySmth(line : String):
 	if %mainText != null:
@@ -104,11 +124,12 @@ func generateReward():
 		$rewards.add_child(chip.instantiate())
 
 func chooseTarget(source):
+	saySmth("Choose target")
 	$targetArrow.visible = true
 	%targetLine.points[0] = source.getCreatureCenter()
 	var target = await targetChoosen
-	print(target)
 	$targetArrow.visible = false
+	hideText()
 	return target
 
 func checkCharacters():
@@ -116,6 +137,10 @@ func checkCharacters():
 		if c._is_point_inside_button_area(get_global_mouse_position()):
 			return c
 	return false
+
+func dropCharacters():
+	for c in $team.get_children():
+		c.drop()
 
 func _input(event: InputEvent) -> void:
 	if Global.isDevBuild:

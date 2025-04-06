@@ -1,6 +1,6 @@
 extends Action
 
-func act():
+func act(repeats : int):
 	value = get_parent().get_parent().dmg
 	var targets
 	if Global.main.turn == "player":
@@ -11,5 +11,6 @@ func act():
 		await get_parent().get_parent().toTarget(t)
 		Global.camera.shake(200,0.1,300)
 		await t.getHit(value)
+		get_parent().get_parent().attacked.emit(value)
 		await get_parent().get_parent().fromTarget()
-	super()
+	super(repeats)

@@ -96,12 +96,12 @@ func _mouse_entered() -> void:
 
 func _mouse_exited() -> void:
 	_timer.stop()
-	_visuals.hide()
+	_visuals.customHide()
 
 
 func _custom_show() -> void:
 	_timer.stop()
-	_visuals.show()
+	_visuals.customShow()
 
 
 func _get_screen_pos() -> Vector2:

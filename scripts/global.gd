@@ -20,9 +20,10 @@ var encounters = [
 	["troll", "demon"],
 	["worm", "worm", "demon"],
 	["demon", "demon", "slime", "slime"],
-	["troll", "troll"],
+	["split"],
 ]
 var chips = [
 	"giveAttackAll", "giveHeal", "giveAttack",
-	"giveWeak", "givePower"
+	"giveWeak", "givePower", "moreHP", "moreDMG",
+	"vampire", "addRepeat"
 ]

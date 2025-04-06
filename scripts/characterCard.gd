@@ -3,8 +3,9 @@ extends DragableObject
 class_name CharacterCard
 
 signal actionChoosen
+signal attacked
 
-const buttonSize = 60
+const buttonSize = 70
 const maxAmountOfChips = 3
 
 @export var maxHp : int = 10
@@ -12,6 +13,7 @@ const maxAmountOfChips = 3
 @export var dmg : int = 1
 @export var actions : Array[String]
 @export var title : String = "Depression"
+@export var actionRepeats : int = 1
 
 var chips : Array[Chip]
 var actionButtons : Array[ActionButton] = []
@@ -20,36 +22,39 @@ var startPos = Vector2.ZERO
 @onready var defaultStats = {
 	"hp" : maxHp,
 	"dmg" : dmg,
-	"actions" : []
+	"repeats" : actionRepeats
 }
 
 func _ready() -> void:
 	super()
-	defaultStats["actions"].append_array(actions)
 	for action in actions:
-		var button = ActionButton.new()
-		button.actionName = action
-		actionButtons.append(button)
+		addAction(action)
 	if get_parent().name == "enemies":
 		$action.text = title
 	update()
+	await get_tree().create_timer(0.1).timeout
+	$appear.play()
+	$statusAnim.play("appear")
 	await $statusAnim.animation_finished
 	%shadowCreature.texture = $creature.texture
 	%shadowCreature.size = $creature.size
 	await get_tree().create_timer(randf_range(0,1)).timeout
 	$anim.play("idle")
 
+func drop():
+	$anim.play("drop")
+	await $anim.animation_finished
+	$anim.play("idle")
 
 func myTurn():
-	#print(actions)
-	#for button in actionButtons:
-		#print(button.actionName)
 	$action.text = ""
 	var numOfActions = actionButtons.size()
+	for action in $actions.get_children():
+		action.queue_free()
 	for i in range(0,numOfActions):
 		var actionButton = ActionButton.new()
 		actionButton.actionName = actionButtons[i].actionName
-		actionButton.initialPos = Vector2(0,-60 - (numOfActions - i - 1) * buttonSize)
+		actionButton.initialPos = Vector2(-50,-60 - (numOfActions - i - 1) * buttonSize)
 		add_child(actionButton)
 	await actionChoosen
 	for action in get_children():
@@ -62,7 +67,6 @@ func myTurn():
 	get_parent().nextCard()
 
 func addAction(t : String):
-	actions.append(title)
 	var button = ActionButton.new()
 	button.actionName = t
 	actionButtons.append(button)
@@ -90,14 +94,12 @@ func fromTarget():
 
 func reset():
 	maxHp = defaultStats["hp"]
+	hp = defaultStats["hp"]
 	dmg = defaultStats["dmg"]
-	actions.clear()
-	actions.append_array(defaultStats["actions"])
+	actionRepeats = defaultStats["repeats"]
 	actionButtons.clear()
 	for action in actions:
-		var button = ActionButton.new()
-		button.actionName = action
-		actionButtons.append(button)
+		addAction(action)
 	for chip in $chips.get_children():
 		chip.activate()
 		await chip.chipActivated
@@ -110,7 +112,6 @@ func addChip(t : String):
 	var chip = load("res://prefabs/chips/%s.tscn" % t).instantiate()
 	chip.used = true
 	$chips.add_child(chip)
-	chip.activate()
 
 func getCreatureCenter():
 	return $creature.global_position + $creature.get_rect().size / 2
@@ -123,16 +124,19 @@ func getHit(value : int):
 	hp -= value
 	update()
 	$statusAnim.play("hit")
+	$hit.play()
 	checkHp()
 	return await $statusAnim.animation_finished
 
 func checkHp():
 	if hp <= 0:
+		$death.play()
 		await $statusAnim.animation_finished
 		queue_free()
 
 func heal(value : int):
 	hp += value
+	$heal.play()
 	$statusAnim.play("heal")
 	if hp > maxHp:
 		hp = maxHp
@@ -141,12 +145,14 @@ func heal(value : int):
 
 func power(value : int):
 	dmg += value
+	$power.play()
 	$statusAnim.play("power")
 	update()
 	return await $statusAnim.animation_finished
 
 func weak(value : int):
 	dmg -= value
+	$weak.play()
 	$statusAnim.play("weak")
 	if dmg < 0:
 		dmg = 0

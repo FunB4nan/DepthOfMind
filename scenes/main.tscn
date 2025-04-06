@@ -1,14 +1,29 @@
-[gd_scene load_steps=10 format=3 uid="uid://bo7lctut181n7"]
+[gd_scene load_steps=20 format=3 uid="uid://bo7lctut181n7"]
 
 [ext_resource type="Script" uid="uid://biqr5cg54kugb" path="res://scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="Script" uid="uid://6nike0x2aqi3" path="res://scripts/cardSlot.gd" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://ced360sr2ruk2" path="res://prefabs/ui.tscn" id="2_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://ckdj1akw61rq1" path="res://sprites/trapdoor1.png" id="2_o6xl0"]
 [ext_resource type="Script" uid="uid://b34ux4d6hs6rk" path="res://scripts/camera.gd" id="2_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://b3tp8o3a4sa5t" path="res://sprites/particle.png" id="2_tefeu"]
+[ext_resource type="AudioStream" uid="uid://7jextdogld6o" path="res://music/background.mp3" id="7_85g3d"]
+[ext_resource type="Texture2D" uid="uid://b4drlfet1rxf4" path="res://sprites/trapdoor2.png" id="7_tipki"]
+[ext_resource type="Texture2D" uid="uid://2vaab74uo26r" path="res://sprites/trapdoor3.png" id="8_85g3d"]
+[ext_resource type="AudioStream" uid="uid://e32r5xpmy6om" path="res://sfx/fall.mp3" id="8_choun"]
 
 [sub_resource type="Gradient" id="Gradient_o6xl0"]
 offsets = PackedFloat32Array(0, 0.526667, 1)
 colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_choun"]
+_limits = [5.0, 6.0, 0.0, 1.0]
+_data = [Vector2(0, 6), 0.0, 0.0, 0, 0, Vector2(1, 5), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ya4ey"]
+_limits = [15.0, 25.0, 0.0, 1.0]
+_data = [Vector2(0, 15), 0.0, 0.0, 0, 0, Vector2(1, 25), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="Curve" id="Curve_jyhfs"]
 _limits = [1.0, 4.0, 0.0, 1.0]
@@ -29,8 +44,136 @@ glow_hdr_threshold = 1.09
 glow_hdr_scale = 1.5
 glow_hdr_luminance_cap = 30.87
 
+[sub_resource type="Animation" id="Animation_ya4ey"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("trapdoor:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_o6xl0")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("trapdoor:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("fall:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("fallParticles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_choun"]
+resource_name = "nextEncounter"
+length = 1.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("trapdoor:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_o6xl0"), ExtResource("7_tipki"), ExtResource("8_85g3d"), null, ExtResource("2_o6xl0")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("trapdoor:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 1.6, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"dropCharacters"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("fall:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("fallParticles:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.6, 1.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eb6dy"]
+_data = {
+&"RESET": SubResource("Animation_ya4ey"),
+&"nextEncounter": SubResource("Animation_choun")
+}
+
 [node name="main" type="Node2D"]
 script = ExtResource("1_jyhfs")
+
+[node name="trapdoor" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+texture = ExtResource("2_o6xl0")
 
 [node name="camera" type="Camera2D" parent="."]
 position = Vector2(640, 360)
@@ -53,13 +196,24 @@ angular_velocity_max = 218.18
 scale_amount_min = 0.2
 color_ramp = SubResource("Gradient_o6xl0")
 
+[node name="fallParticles" type="CPUParticles2D" parent="."]
+position = Vector2(640, 360)
+emitting = false
+amount = 100
+emission_shape = 3
+emission_rect_extents = Vector2(320, 360)
+split_scale = true
+scale_curve_x = SubResource("Curve_choun")
+scale_curve_y = SubResource("Curve_ya4ey")
+
 [node name="team" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 163.0
-offset_top = 576.0
+offset_top = 540.0
 offset_right = 1106.0
-offset_bottom = 679.0
+offset_bottom = 643.0
+mouse_filter = 2
 script = ExtResource("1_o5qli")
 
 [node name="rewards" type="Control" parent="."]
@@ -69,6 +223,7 @@ offset_left = 276.0
 offset_top = 281.0
 offset_right = 1058.0
 offset_bottom = 418.0
+mouse_filter = 2
 script = ExtResource("1_o5qli")
 isReward = true
 
@@ -76,9 +231,10 @@ isReward = true
 layout_mode = 3
 anchors_preset = 0
 offset_left = 161.0
-offset_top = 43.0
+offset_top = 60.0
 offset_right = 1104.0
-offset_bottom = 146.0
+offset_bottom = 163.0
+mouse_filter = 2
 script = ExtResource("1_o5qli")
 
 [node name="endTurn" type="Button" parent="."]
@@ -104,9 +260,9 @@ texture_mode = 1
 [node name="mainText" type="Label" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(1280, 100)
-offset_top = 150.0
+offset_top = 160.0
 offset_right = 1280.0
-offset_bottom = 250.0
+offset_bottom = 260.0
 theme_override_font_sizes/font_size = 48
 text = "Attach chip to one member of your team"
 horizontal_alignment = 1
@@ -116,8 +272,25 @@ vertical_alignment = 1
 volume_db = -30.0
 bus = &"sfx"
 
+[node name="background" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_85g3d")
+volume_db = -40.0
+autoplay = true
+bus = &"music"
+
+[node name="fall" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_choun")
+volume_db = -20.0
+pitch_scale = 2.0
+bus = &"sfx"
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jyhfs")
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_eb6dy")
+}
 
 [connection signal="timeout" from="camera/Timer" to="camera" method="_on_timer_timeout"]
 [connection signal="pressed" from="endTurn" to="." method="_on_end_turn_pressed"]

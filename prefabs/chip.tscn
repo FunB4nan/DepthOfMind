@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://uae0fbdddtx8"]
+[gd_scene load_steps=14 format=3 uid="uid://uae0fbdddtx8"]
 
 [ext_resource type="Texture2D" uid="uid://74lol1we64rb" path="res://sprites/concept1.png" id="1_p3tgf"]
 [ext_resource type="Script" uid="uid://bb0wylapthv32" path="res://scripts/chip.gd" id="2_4asax"]
@@ -7,10 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://djsvflnfqpmyd" path="res://sprites/concept3.png" id="5_2mnqw"]
 [ext_resource type="Script" uid="uid://bbyh1ro214ume" path="res://scripts/tooltip.gd" id="6_k1vl3"]
 [ext_resource type="PackedScene" uid="uid://rqw3ae71b16o" path="res://prefabs/tooltips/chipTooltip.tscn" id="7_2mnqw"]
+[ext_resource type="AudioStream" uid="uid://bunqw4m04k17l" path="res://sfx/chipConnect.mp3" id="8_e00e0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_85g3d"]
 atlas = ExtResource("1_p3tgf")
-region = Rect2(339, 467, 55, 58)
+region = Rect2(358, 463, 58, 61)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h4woq"]
 atlas = ExtResource("3_4asax")
@@ -84,6 +85,10 @@ script = ExtResource("6_k1vl3")
 visuals_res = ExtResource("7_2mnqw")
 owner_path = NodePath("..")
 metadata/_custom_type_script = "uid://bbyh1ro214ume"
+
+[node name="connect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_e00e0")
+bus = &"sfx"
 
 [connection signal="mouse_entered" from="." to="Tooltip" method="_mouse_entered"]
 [connection signal="mouse_exited" from="." to="Tooltip" method="_mouse_exited"]

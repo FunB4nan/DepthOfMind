@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dejsrdvibn7ej"]
+
+[ext_resource type="PackedScene" uid="uid://bxh0rk1yihren" path="res://prefabs/characterCard.tscn" id="1_k1ehj"]
+[ext_resource type="Texture2D" uid="uid://74lol1we64rb" path="res://sprites/concept1.png" id="2_y83n1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eki74"]
+atlas = ExtResource("2_y83n1")
+region = Rect2(667, 539, 73, 87)
+
+[node name="split" instance=ExtResource("1_k1ehj")]
+maxHp = 50
+dmg = 5
+actions = Array[String](["spawnDepression", "attackAll", "power"])
+title = "Split personality"
+actionRepeats = 2
+
+[node name="creature" parent="." index="7"]
+texture = SubResource("AtlasTexture_eki74")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpf3if4tm88jj"]
+
+[ext_resource type="PackedScene" uid="uid://uae0fbdddtx8" path="res://prefabs/chip.tscn" id="1_y3oyk"]
+[ext_resource type="Script" uid="uid://b04iw5hhpjlm4" path="res://scripts/chips/addRepeat.gd" id="2_xy3e6"]
+[ext_resource type="Texture2D" uid="uid://xmcplxwlb3eg" path="res://sprites/chips.png" id="3_kwt61"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bxhun"]
+atlas = ExtResource("3_kwt61")
+region = Rect2(104, 34, 33, 28)
+
+[node name="addRepeat" instance=ExtResource("1_y3oyk")]
+script = ExtResource("2_xy3e6")
+title = "addRepeat"
+
+[node name="icon" parent="." index="0"]
+offset_left = 10.0
+offset_right = 43.0
+offset_bottom = 50.0
+texture = SubResource("AtlasTexture_bxhun")

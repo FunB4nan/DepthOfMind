@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5cmniyosbq4a"]
+
+[ext_resource type="PackedScene" uid="uid://uae0fbdddtx8" path="res://prefabs/chip.tscn" id="1_5r180"]
+[ext_resource type="Script" uid="uid://1tv14k7yvceq" path="res://scripts/chips/vampire.gd" id="2_lhecc"]
+[ext_resource type="Texture2D" uid="uid://xmcplxwlb3eg" path="res://sprites/chips.png" id="2_yjm35"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhecc"]
+atlas = ExtResource("2_yjm35")
+region = Rect2(140, 39, 30, 20)
+
+[node name="vampire" instance=ExtResource("1_5r180")]
+script = ExtResource("2_lhecc")
+title = "vampire"
+
+[node name="icon" parent="." index="0"]
+offset_left = 12.0
+offset_top = 23.0
+offset_right = 42.0
+offset_bottom = 50.0
+texture = SubResource("AtlasTexture_lhecc")
