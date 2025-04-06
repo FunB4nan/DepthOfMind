@@ -58,9 +58,9 @@ func doTurn():
 						button.hideMe()
 						await get_tree().create_timer(0.1).timeout
 			else:
+				character.actionButtons.shuffle()
 				for i in range(0,character.actionRepeats):
-					character.actionButtons.shuffle()
-					var actionName = character.actionButtons[0].actionName
+					var actionName = character.actionButtons[i].actionName
 					character.get_node("actions").add_child(load("res://prefabs/actions/%s.tscn" % actionName).instantiate())
 					var action : Action = character.get_node("actions").get_child(0)
 					if action.friendly:

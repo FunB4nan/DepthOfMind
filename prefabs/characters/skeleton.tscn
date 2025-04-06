@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://nf67iwitmcb2"]
+
+[ext_resource type="PackedScene" uid="uid://bxh0rk1yihren" path="res://prefabs/characterCard.tscn" id="1_xaaik"]
+[ext_resource type="Texture2D" uid="uid://74lol1we64rb" path="res://sprites/concept1.png" id="2_4m3ly"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mke2j"]
+atlas = ExtResource("2_4m3ly")
+region = Rect2(558, 624, 53, 66)
+
+[node name="skeleton" instance=ExtResource("1_xaaik")]
+maxHp = 14
+dmg = 3
+actions = Array[String](["attack", "attackAll"])
+title = "Anxiety"
+actionRepeats = 2
+
+[node name="creature" parent="." index="7"]
+texture = SubResource("AtlasTexture_mke2j")

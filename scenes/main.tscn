@@ -244,6 +244,7 @@ offset_right = 1261.0
 offset_bottom = 700.0
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
+disabled = true
 text = "end turn"
 
 [node name="targetArrow" type="Node2D" parent="."]

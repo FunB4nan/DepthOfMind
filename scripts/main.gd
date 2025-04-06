@@ -26,6 +26,7 @@ func _ready() -> void:
 	await saySmth("Your goal is clear mind from all diseases")
 	await hideText()
 	await get_tree().create_timer(1).timeout
+	$endTurn.disabled = false
 	nextEncounter()
 	await allActionsChoosen
 	await saySmth("You can change the sequence of the move")
@@ -52,7 +53,7 @@ func nextEncounter():
 	await fightEnded
 	isFighting = false
 	if $team.get_child_count() > 0:
-		saySmth("Attach one of the memory chips to your ally.")
+		saySmth("Attach one of the memory chips to your ally")
 		generateReward()
 		await chipPicked
 		for reward in $rewards.get_children():
@@ -63,9 +64,9 @@ func nextEncounter():
 		if Global.level < Global.encounters.size():
 			nextEncounter()
 		else:
-			await saySmth("You win!")
+			await saySmth("You win")
 			await hideText()
-			await saySmth("Thank you for playing! Game was made for Ludum Dare 57")
+			await saySmth("Thank you for playing Game was made for Ludum Dare 57")
 			await hideText()
 			Global.level = 0
 			get_tree().reload_current_scene()

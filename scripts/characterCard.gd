@@ -119,6 +119,8 @@ func getCreatureCenter():
 func update():
 	%hp.text = str(hp)
 	%dmg.text = str(dmg)
+	if hp < 0:
+		%hp.text = "0"
 
 func getHit(value : int):
 	hp -= value

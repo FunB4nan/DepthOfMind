@@ -18,8 +18,8 @@ var encounters = [
 	["demon", "demon"],
 	["worm", "slime", "slime"],
 	["troll", "demon"],
-	["worm", "worm", "demon"],
-	["demon", "demon", "slime", "slime"],
+	["worm", "worm", "skeleton"],
+	["skeleton", "skeleton", "slime", "slime"],
 	["split"],
 ]
 var chips = [
