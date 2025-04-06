@@ -9,6 +9,7 @@ region = Rect2(609, 560, 53, 64)
 
 [node name="worm" instance=ExtResource("1_sd30q")]
 actions = Array[String](["attackAll"])
+title = "Mania"
 
-[node name="creature" parent="." index="2"]
+[node name="creature" parent="." index="3"]
 texture = SubResource("AtlasTexture_1o4yw")

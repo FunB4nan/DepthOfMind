@@ -10,6 +10,7 @@ region = Rect2(509, 561, 40, 59)
 [node name="demon" instance=ExtResource("1_qph5q")]
 maxHp = 5
 actions = Array[String](["attack"])
+title = "Addiction"
 
-[node name="creature" parent="." index="2"]
+[node name="creature" parent="." index="3"]
 texture = SubResource("AtlasTexture_j3nc5")

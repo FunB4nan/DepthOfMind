@@ -13,11 +13,11 @@ var mouseInside = false
 
 var state = IN_SLOT
 
-func _init() -> void:
+func _ready() -> void:
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	match state:
 		IN_CURSOR:
 			global_position = get_global_mouse_position() + offset

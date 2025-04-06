@@ -42,26 +42,28 @@ func nextCard():
 		if cardIndex >= childrenByX.size():
 			allCharactersSet = true
 			cardIndex = 0
+			Global.main.allActionsChoosen.emit()
 
 func doTurn():
-	for character in get_children():
-		if Global.main.turn == "player":
-			for button in character.get_children():
-				if button is ActionButton:
-					button.hideMe()
-					await get_tree().create_timer(0.1).timeout
-		else:
-			character.actionButtons.shuffle()
-			var actionName = character.actionButtons[0].actionName
-			character.get_node("actions").add_child(load("res://prefabs/actions/%s.tscn" % actionName).instantiate())
-			var action : Action = character.get_node("actions").get_child(0)
-			if action.friendly:
-				action.target = childrenByX[0]
+	for character in childrenByX:
+		if character != null:
+			if Global.main.turn == "player":
+				for button in character.get_children():
+					if button is ActionButton:
+						button.hideMe()
+						await get_tree().create_timer(0.1).timeout
 			else:
-				action.target = Global.main.getCardSlot("team").childrenByX[0]
-		if character.get_node("actions").get_child_count() > 0:
-			if Global.main.isFighting:
-				character.get_node("actions").get_child(0).act()
-				await character.get_node("actions").get_child(0).actionFinished
+				character.actionButtons.shuffle()
+				var actionName = character.actionButtons[0].actionName
+				character.get_node("actions").add_child(load("res://prefabs/actions/%s.tscn" % actionName).instantiate())
+				var action : Action = character.get_node("actions").get_child(0)
+				if action.friendly:
+					action.target = childrenByX[0]
+				else:
+					action.target = Global.main.getCardSlot("team").childrenByX[0]
+			if character.get_node("actions").get_child_count() > 0:
+				if Global.main.isFighting:
+					character.get_node("actions").get_child(0).act()
+					await character.get_node("actions").get_child(0).actionFinished
 	allCharactersSet = false
 	Global.main.giveTurn()

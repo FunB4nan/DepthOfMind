@@ -2,18 +2,32 @@ extends Node2D
 
 class_name Main
 
+const textDelay = 0.02
+
 signal targetChoosen
 signal chipPicked
 signal fightEnded
+signal someKeyPressed
+signal allActionsChoosen
 
 var turn = "enemies"
 var isFighting = true
 
 func _ready() -> void:
 	Global.main = self
+	await saySmth("This is mind of human")
+	await hideText()
+	await saySmth("Your goal is clear mind from all diseases")
+	await hideText()
+	await get_tree().create_timer(1).timeout
 	nextEncounter()
+	await allActionsChoosen
+	await saySmth("You can change the sequence of the move")
+	await hideText()
+	await saySmth("Just drag your team members to reorder them")
+	await hideText()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	%arrow.position = %targetLine.points[1]
 	%targetLine.points[1] = get_global_mouse_position() + Vector2(0,30)
 
@@ -31,17 +45,36 @@ func nextEncounter():
 	giveTurn()
 	await fightEnded
 	isFighting = false
-	Global.chips.shuffle()
-	for i in range(0,3):
-		var chip = load("res://prefabs/chips/%s.tscn" % Global.chips[i])
-		$rewards.add_child(chip.instantiate())
+	saySmth("Attach one of the memory chips to your ally.")
+	generateReward()
 	await chipPicked
 	for reward in $rewards.get_children():
 		reward.queue_free()
+	await hideText()
 	if Global.level < Global.encounters.size():
 		nextEncounter()
 	else:
 		get_tree().quit()
+
+func saySmth(line : String):
+	%mainText.text = line
+	%mainText.visible_characters = 0
+	while %mainText.visible_characters < line.length():
+		%mainText.visible_characters += 1
+		$textSound.stream = load("res://sfx/textSound%s.mp3" % randi_range(1,3))
+		$textSound.play()
+		if Input.is_anything_pressed():
+			return await get_tree().create_timer(0.01).timeout
+		await get_tree().create_timer(textDelay).timeout
+	return await someKeyPressed
+
+func hideText():
+	while %mainText.visible_characters > 0:
+		%mainText.visible_characters -= 1
+		$textSound.stream = load("res://sfx/textSound%s.mp3" % randi_range(1,3))
+		$textSound.play()
+		await get_tree().create_timer(textDelay).timeout
+	return await get_tree().create_timer(0.05).timeout
 
 func giveTurn():
 	match turn:
@@ -56,6 +89,12 @@ func giveTurn():
 func getCardSlot(title : String):
 	return get_node(title)
 
+func generateReward():
+	Global.chips.shuffle()
+	for i in range(0,3):
+		var chip = load("res://prefabs/chips/%s.tscn" % Global.chips[i])
+		$rewards.add_child(chip.instantiate())
+
 func chooseTarget(source):
 	$targetArrow.visible = true
 	%targetLine.points[0] = source.getCreatureCenter()
@@ -65,14 +104,17 @@ func chooseTarget(source):
 	return target
 
 func checkCharacters():
-	for char in $team.get_children():
-		if char._is_point_inside_button_area(get_global_mouse_position()):
-			return char
+	for c in $team.get_children():
+		if c._is_point_inside_button_area(get_global_mouse_position()):
+			return c
 	return false
 
-#func _input(event: InputEvent) -> void:
-	#if event.is_action_pressed("removeObject"):
-		#$enemies.get_child(0).queue_free()
+func _input(event: InputEvent) -> void:
+	if Global.isDevBuild:
+		if event.is_action_pressed("removeObject"):
+			$enemies.get_child(0).queue_free()
+	if event.is_pressed():
+		someKeyPressed.emit()
 
 func _on_end_turn_pressed() -> void:
 	$team.doTurn()
