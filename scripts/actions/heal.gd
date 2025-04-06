@@ -5,6 +5,7 @@ func _ready() -> void:
 
 func act():
 	if target != null:
-		target.heal(value)
 		await get_parent().get_parent().toTarget(target)
+		await target.heal(value)
+		await get_parent().get_parent().fromTarget()
 	super()

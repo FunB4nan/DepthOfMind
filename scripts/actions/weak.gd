@@ -5,6 +5,8 @@ func _ready() -> void:
 
 func act():
 	if target != null:
-		target.weak(value)
 		await get_parent().get_parent().toTarget(target)
+		Global.camera.shake(200,0.1,300)
+		await target.weak(value)
+		await get_parent().get_parent().fromTarget()
 	super()

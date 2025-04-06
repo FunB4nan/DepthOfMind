@@ -3,6 +3,7 @@ extends Node
 signal localeChanged
 
 var main : Main
+var camera : Camera
 var isDevBuild = false
 var isTutorialPassed = false
 var level = 0

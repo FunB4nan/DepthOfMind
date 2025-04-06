@@ -13,6 +13,8 @@ expand_margin_left = 5.0
 expand_margin_top = 5.0
 expand_margin_right = 5.0
 expand_margin_bottom = 5.0
+shadow_size = 1
+shadow_offset = Vector2(4, 4)
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnojl"]
@@ -30,6 +32,8 @@ expand_margin_left = 5.0
 expand_margin_top = 5.0
 expand_margin_right = 5.0
 expand_margin_bottom = 5.0
+shadow_size = 1
+shadow_offset = Vector2(4, 4)
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efh0j"]
@@ -47,6 +51,8 @@ expand_margin_left = 5.0
 expand_margin_top = 5.0
 expand_margin_right = 5.0
 expand_margin_bottom = 5.0
+shadow_size = 1
+shadow_offset = Vector2(4, 4)
 anti_aliasing = false
 
 [resource]
@@ -57,5 +63,8 @@ Button/fonts/font = ExtResource("1_mbucg")
 Button/styles/disabled = SubResource("StyleBoxFlat_mbucg")
 Button/styles/hover = SubResource("StyleBoxFlat_mnojl")
 Button/styles/normal = SubResource("StyleBoxFlat_efh0j")
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.301961)
+Label/constants/shadow_offset_x = 3
+Label/constants/shadow_offset_y = 3
 Label/font_sizes/font_size = 36
 Label/fonts/font = ExtResource("1_mbucg")

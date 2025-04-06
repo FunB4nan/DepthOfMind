@@ -1,16 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://7td3ptum1ofa"]
 
 [ext_resource type="PackedScene" uid="uid://bxh0rk1yihren" path="res://prefabs/characterCard.tscn" id="1_wj4i7"]
-[ext_resource type="Texture2D" uid="uid://c1ay2kie5qi42" path="res://sprites/concept.png" id="2_6sn41"]
+[ext_resource type="Texture2D" uid="uid://74lol1we64rb" path="res://sprites/concept1.png" id="2_wj4i7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_buvsy"]
-atlas = ExtResource("2_6sn41")
-region = Rect2(555, 566, 40, 54)
+atlas = ExtResource("2_wj4i7")
+region = Rect2(551, 563, 44, 59)
 
 [node name="troll" instance=ExtResource("1_wj4i7")]
 maxHp = 15
 actions = Array[String](["power", "attack"])
 title = "Paranoia"
 
-[node name="creature" parent="." index="3"]
+[node name="creature" parent="." index="4"]
 texture = SubResource("AtlasTexture_buvsy")

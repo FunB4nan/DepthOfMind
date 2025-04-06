@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bo7lctut181n7"]
+[gd_scene load_steps=10 format=3 uid="uid://bo7lctut181n7"]
 
 [ext_resource type="Script" uid="uid://biqr5cg54kugb" path="res://scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="Script" uid="uid://6nike0x2aqi3" path="res://scripts/cardSlot.gd" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://ced360sr2ruk2" path="res://prefabs/ui.tscn" id="2_jyhfs"]
+[ext_resource type="Script" uid="uid://b34ux4d6hs6rk" path="res://scripts/camera.gd" id="2_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://b3tp8o3a4sa5t" path="res://sprites/particle.png" id="2_tefeu"]
 
 [sub_resource type="Gradient" id="Gradient_o6xl0"]
@@ -11,7 +12,7 @@ colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="Curve" id="Curve_jyhfs"]
 _limits = [1.0, 4.0, 0.0, 1.0]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 4), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 4), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_jyhfs"]
@@ -19,8 +20,24 @@ interpolation_mode = 1
 offsets = PackedFloat32Array(0, 0.52, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1)
 
+[sub_resource type="Environment" id="Environment_jyhfs"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 2.4
+glow_bloom = 0.13
+glow_hdr_threshold = 1.09
+glow_hdr_scale = 1.5
+glow_hdr_luminance_cap = 30.87
+
 [node name="main" type="Node2D"]
 script = ExtResource("1_jyhfs")
+
+[node name="camera" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+script = ExtResource("2_tbgi4")
+
+[node name="Timer" type="Timer" parent="camera"]
+one_shot = true
 
 [node name="UI" parent="." instance=ExtResource("2_jyhfs")]
 
@@ -84,13 +101,6 @@ width_curve = SubResource("Curve_jyhfs")
 gradient = SubResource("Gradient_jyhfs")
 texture_mode = 1
 
-[node name="arrow" type="Polygon2D" parent="targetArrow"]
-unique_name_in_owner = true
-position = Vector2(104, 0)
-rotation = -1.5708
-offset = Vector2(-8, 21)
-polygon = PackedVector2Array(0, 0, 20, -20, 0, -40)
-
 [node name="mainText" type="Label" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(1280, 100)
@@ -104,5 +114,10 @@ vertical_alignment = 1
 
 [node name="textSound" type="AudioStreamPlayer" parent="."]
 volume_db = -30.0
+bus = &"sfx"
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jyhfs")
+
+[connection signal="timeout" from="camera/Timer" to="camera" method="_on_timer_timeout"]
 [connection signal="pressed" from="endTurn" to="." method="_on_end_turn_pressed"]

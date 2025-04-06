@@ -1,16 +1,15 @@
 [gd_scene load_steps=4 format=3 uid="uid://u6ou6we2ahk1"]
 
 [ext_resource type="PackedScene" uid="uid://bxh0rk1yihren" path="res://prefabs/characterCard.tscn" id="1_v0dbv"]
-[ext_resource type="Texture2D" uid="uid://c1ay2kie5qi42" path="res://sprites/concept.png" id="2_7ibvm"]
+[ext_resource type="Texture2D" uid="uid://74lol1we64rb" path="res://sprites/concept1.png" id="2_v0dbv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k8xkx"]
-atlas = ExtResource("2_7ibvm")
-region = Rect2(510, 648, 43, 28)
+atlas = ExtResource("2_v0dbv")
+region = Rect2(505, 642, 48, 34)
 
 [node name="slime" instance=ExtResource("1_v0dbv")]
 maxHp = 8
 actions = Array[String](["heal", "weak"])
 
-[node name="creature" parent="." index="2"]
+[node name="creature" parent="." index="4"]
 texture = SubResource("AtlasTexture_k8xkx")
-stretch_mode = 5

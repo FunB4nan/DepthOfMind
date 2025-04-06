@@ -36,7 +36,6 @@ func _ready() -> void:
 	await hideText()
 
 func _process(_delta: float) -> void:
-	%arrow.position = %targetLine.points[1]
 	%targetLine.points[1] = get_global_mouse_position() + Vector2(0,30)
 
 func nextEncounter():

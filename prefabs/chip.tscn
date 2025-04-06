@@ -1,16 +1,59 @@
-[gd_scene load_steps=6 format=3 uid="uid://uae0fbdddtx8"]
+[gd_scene load_steps=13 format=3 uid="uid://uae0fbdddtx8"]
 
-[ext_resource type="Texture2D" uid="uid://c1ay2kie5qi42" path="res://sprites/concept.png" id="1_1q2rn"]
+[ext_resource type="Texture2D" uid="uid://74lol1we64rb" path="res://sprites/concept1.png" id="1_p3tgf"]
 [ext_resource type="Script" uid="uid://bb0wylapthv32" path="res://scripts/chip.gd" id="2_4asax"]
 [ext_resource type="Texture2D" uid="uid://xmcplxwlb3eg" path="res://sprites/chips.png" id="3_4asax"]
+[ext_resource type="Texture2D" uid="uid://bbatnkdebip0s" path="res://sprites/concept2.png" id="4_k1vl3"]
+[ext_resource type="Texture2D" uid="uid://djsvflnfqpmyd" path="res://sprites/concept3.png" id="5_2mnqw"]
+[ext_resource type="Script" uid="uid://bbyh1ro214ume" path="res://scripts/tooltip.gd" id="6_k1vl3"]
+[ext_resource type="PackedScene" uid="uid://rqw3ae71b16o" path="res://prefabs/tooltips/chipTooltip.tscn" id="7_2mnqw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_85g3d"]
-atlas = ExtResource("1_1q2rn")
-region = Rect2(340, 468, 53, 56)
+atlas = ExtResource("1_p3tgf")
+region = Rect2(339, 467, 55, 58)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h4woq"]
 atlas = ExtResource("3_4asax")
 region = Rect2(1, 3, 27, 27)
+
+[sub_resource type="Animation" id="Animation_6gb5t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:atlas")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_p3tgf")]
+}
+
+[sub_resource type="Animation" id="Animation_e00e0"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:atlas")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_p3tgf"), ExtResource("4_k1vl3"), ExtResource("5_2mnqw")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ojtj0"]
+_data = {
+&"RESET": SubResource("Animation_6gb5t"),
+&"idle": SubResource("Animation_e00e0")
+}
 
 [node name="chip" type="TextureRect"]
 offset_right = 42.0
@@ -28,3 +71,19 @@ offset_right = 40.0
 offset_bottom = 49.0
 texture = SubResource("AtlasTexture_h4woq")
 stretch_mode = 5
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ojtj0")
+}
+autoplay = "idle"
+speed_scale = 1.25
+
+[node name="Tooltip" type="Node" parent="."]
+script = ExtResource("6_k1vl3")
+visuals_res = ExtResource("7_2mnqw")
+owner_path = NodePath("..")
+metadata/_custom_type_script = "uid://bbyh1ro214ume"
+
+[connection signal="mouse_entered" from="." to="Tooltip" method="_mouse_entered"]
+[connection signal="mouse_exited" from="." to="Tooltip" method="_mouse_exited"]

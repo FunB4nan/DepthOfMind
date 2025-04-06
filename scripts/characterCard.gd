@@ -15,6 +15,8 @@ const maxAmountOfChips = 3
 
 var chips : Array[Chip]
 var actionButtons : Array[ActionButton] = []
+
+var startPos = Vector2.ZERO
 @onready var defaultStats = {
 	"hp" : maxHp,
 	"dmg" : dmg,
@@ -23,7 +25,6 @@ var actionButtons : Array[ActionButton] = []
 
 func _ready() -> void:
 	super()
-	texture = load("res://sprites/card.png")
 	defaultStats["actions"].append_array(actions)
 	for action in actions:
 		var button = ActionButton.new()
@@ -33,8 +34,11 @@ func _ready() -> void:
 		$action.text = title
 	update()
 	await $statusAnim.animation_finished
+	%shadowCreature.texture = $creature.texture
+	%shadowCreature.size = $creature.size
 	await get_tree().create_timer(randf_range(0,1)).timeout
 	$anim.play("idle")
+
 
 func myTurn():
 	#print(actions)
@@ -64,20 +68,25 @@ func addAction(t : String):
 	actionButtons.append(button)
 
 func toTarget(target : CharacterCard):
-	var startPos = $creature.global_position
+	startPos = $creature.global_position
 	var tween = create_tween().bind_node(self)
 	var direction = int(startPos.y >= target.global_position.y) * 2 - 1
 	var targetPos = target.get_node("creature").global_position
 	tween.tween_property($creature, "global_position", targetPos + Vector2(0,50) * direction, 0.3)
 	tween.play()
+	Global.camera.zoomTo(target.global_position, Vector2(1.5,1.5))
 	await tween.finished
 	$anim.play("punch")
-	await $anim.animation_finished
+	return await $anim.animation_finished
+	
+
+func fromTarget():
 	$anim.play("idle")
-	var tween2 = create_tween().bind_node(self)
-	tween2.tween_property($creature, "global_position", startPos, 0.5)
-	tween2.play()
-	return await tween2.finished
+	var tween = create_tween().bind_node(self)
+	tween.tween_property($creature, "global_position", startPos, 0.5)
+	tween.play()
+	Global.camera.zoomTo(Vector2(640,360), Vector2(1,1))
+	return await tween.finished
 
 func reset():
 	maxHp = defaultStats["hp"]
@@ -113,25 +122,33 @@ func update():
 func getHit(value : int):
 	hp -= value
 	update()
-	await get_tree().create_timer(0.3).timeout
 	$statusAnim.play("hit")
+	checkHp()
+	return await $statusAnim.animation_finished
+
+func checkHp():
 	if hp <= 0:
+		await $statusAnim.animation_finished
 		queue_free()
 
 func heal(value : int):
 	hp += value
-	await get_tree().create_timer(0.3).timeout
 	$statusAnim.play("heal")
 	if hp > maxHp:
 		hp = maxHp
 	update()
+	return await $statusAnim.animation_finished
 
 func power(value : int):
 	dmg += value
+	$statusAnim.play("power")
 	update()
+	return await $statusAnim.animation_finished
 
 func weak(value : int):
 	dmg -= value
+	$statusAnim.play("weak")
 	if dmg < 0:
 		dmg = 0
 	update()
+	return await $statusAnim.animation_finished

@@ -8,6 +8,8 @@ func act():
 	else:
 		targets = "team"
 	for t in Global.main.getCardSlot(targets).get_children():
-		t.getHit(value)
 		await get_parent().get_parent().toTarget(t)
+		Global.camera.shake(200,0.1,300)
+		await t.getHit(value)
+		await get_parent().get_parent().fromTarget()
 	super()
