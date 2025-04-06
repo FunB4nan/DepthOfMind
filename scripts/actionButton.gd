@@ -7,7 +7,7 @@ var initialPos : Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	showMe(initialPos)
-	text = actionName
+	text = tr(actionName)
 	custom_minimum_size = Vector2(100,20)
 	pressed.connect(actionPressed)
 

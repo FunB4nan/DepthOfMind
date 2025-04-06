@@ -6,4 +6,4 @@ var object
 
 func _ready() -> void:
 	if object != null:
-		%discription.text = tr(object.title)
+		%discription.text = tr(object.title + "Disc")

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cjokntageadiu"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cjokntageadiu"]
 
 [ext_resource type="FontFile" uid="uid://c77dcatag6v0a" path="res://fonts/8-bit Arcade In.ttf" id="1_mbucg"]
 
@@ -55,6 +55,20 @@ shadow_size = 1
 shadow_offset = Vector2(4, 4)
 anti_aliasing = false
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tj8xr"]
+bg_color = Color(0, 0, 0, 0.305882)
+skew = Vector2(-0.2, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing = false
+
 [resource]
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
@@ -68,3 +82,4 @@ Label/constants/shadow_offset_x = 3
 Label/constants/shadow_offset_y = 3
 Label/font_sizes/font_size = 36
 Label/fonts/font = ExtResource("1_mbucg")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_tj8xr")

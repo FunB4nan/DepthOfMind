@@ -42,6 +42,13 @@ removeObject={
 ]
 }
 
+[internationalization]
+
+locale/translation_remaps={
+"res://translation.en.translation": PackedStringArray("res://translation.en.translation:en")
+}
+locale/translations=PackedStringArray("res://translation.en.translation")
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
