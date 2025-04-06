@@ -8,12 +8,13 @@ var center = get_rect().size / 2
 var cardIndex = 0
 var actionIndex = 0
 var allCharactersSet = false
+var reversed = true
 
 func _ready() -> void:
 	child_order_changed.connect(locateObjects)
 	for object in get_children():
 		object.dragPos = center - object.get_rect().size / 2 + Vector2(object.get_index(), 0)
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.1).timeout
 	locateObjects()
 
 func locateObjects():
@@ -21,11 +22,13 @@ func locateObjects():
 	if numOfChildren > 0:
 		childrenByX = get_children()
 		childrenByX.sort_custom(compareX)
+		if !reversed:
+			childrenByX.reverse()
 		var step : float = get_rect().size.x / (numOfChildren + 1)
-		var finalWidth = step * (numOfChildren - 1) + get_child(get_child_count() - 1).get_rect().size.x
+		var finalWidth = step * (numOfChildren - 1) + 94
 		var offset = center.x - finalWidth / 2.0
 		for i in range(0,numOfChildren):
-			childrenByX[i].dragPos = Vector2(step * i + offset,center.y - childrenByX[i].get_rect().size.y / 2)
+			childrenByX[i].dragPos = Vector2(step * i + offset,center.y - 104 / 2)
 			childrenByX[i].moveTo()
 	else:
 		if !isReward:
@@ -42,7 +45,8 @@ func nextCard():
 		if cardIndex >= childrenByX.size():
 			allCharactersSet = true
 			cardIndex = 0
-			Global.main.allActionsChoosen.emit()
+	else:
+		Global.main.allActionsChoosen.emit()
 
 func doTurn():
 	for character in childrenByX:

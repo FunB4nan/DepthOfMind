@@ -32,6 +32,7 @@ func _ready() -> void:
 	if get_parent().name == "enemies":
 		$action.text = title
 	update()
+	await $statusAnim.animation_finished
 	await get_tree().create_timer(randf_range(0,1)).timeout
 	$anim.play("idle")
 

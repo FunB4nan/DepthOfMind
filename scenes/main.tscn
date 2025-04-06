@@ -1,11 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bo7lctut181n7"]
+[gd_scene load_steps=8 format=3 uid="uid://bo7lctut181n7"]
 
 [ext_resource type="Script" uid="uid://biqr5cg54kugb" path="res://scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="Script" uid="uid://6nike0x2aqi3" path="res://scripts/cardSlot.gd" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://ced360sr2ruk2" path="res://prefabs/ui.tscn" id="2_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://b3tp8o3a4sa5t" path="res://sprites/particle.png" id="2_tefeu"]
-[ext_resource type="PackedScene" uid="uid://crd1vlqwpnkq7" path="res://prefabs/characters/robot.tscn" id="3_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://cypp58v71533p" path="res://prefabs/characters/cowBoy.tscn" id="4_tefeu"]
-[ext_resource type="PackedScene" uid="uid://dqiqp2ek5c05a" path="res://prefabs/characters/wizard.tscn" id="5_o6xl0"]
 
 [sub_resource type="Gradient" id="Gradient_o6xl0"]
 offsets = PackedFloat32Array(0, 0.526667, 1)
@@ -23,6 +21,8 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1)
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_jyhfs")
+
+[node name="UI" parent="." instance=ExtResource("2_jyhfs")]
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2(640, 360)
@@ -44,15 +44,6 @@ offset_top = 576.0
 offset_right = 1106.0
 offset_bottom = 679.0
 script = ExtResource("1_o5qli")
-
-[node name="robot" parent="team" instance=ExtResource("3_jyhfs")]
-layout_mode = 0
-
-[node name="cowBoy" parent="team" instance=ExtResource("4_tefeu")]
-layout_mode = 0
-
-[node name="wizard" parent="team" instance=ExtResource("5_o6xl0")]
-layout_mode = 0
 
 [node name="rewards" type="Control" parent="."]
 layout_mode = 3
@@ -102,14 +93,14 @@ polygon = PackedVector2Array(0, 0, 20, -20, 0, -40)
 
 [node name="mainText" type="Label" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(1280, 0)
-offset_left = 6.0
-offset_top = 251.0
-offset_right = 1030.0
-offset_bottom = 283.0
+custom_minimum_size = Vector2(1280, 100)
+offset_top = 150.0
+offset_right = 1280.0
+offset_bottom = 250.0
 theme_override_font_sizes/font_size = 48
 text = "Attach chip to one member of your team"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="textSound" type="AudioStreamPlayer" parent="."]
 volume_db = -30.0

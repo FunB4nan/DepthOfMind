@@ -15,6 +15,12 @@ var isFighting = true
 
 func _ready() -> void:
 	Global.main = self
+	await get_tree().create_timer(0.01).timeout
+	$team.reversed = false
+	$team.add_child(load("res://prefabs/characters/wizard.tscn").instantiate())
+	$team.add_child(load("res://prefabs/characters/cowBoy.tscn").instantiate())
+	$team.add_child(load("res://prefabs/characters/robot.tscn").instantiate())
+	$team.reversed = true
 	await saySmth("This is mind of human")
 	await hideText()
 	await saySmth("Your goal is clear mind from all diseases")
@@ -22,6 +28,8 @@ func _ready() -> void:
 	await get_tree().create_timer(1).timeout
 	nextEncounter()
 	await allActionsChoosen
+	await saySmth("You can change the sequence of the move")
+	await hideText()
 	await saySmth("You can change the sequence of the move")
 	await hideText()
 	await saySmth("Just drag your team members to reorder them")
@@ -57,16 +65,17 @@ func nextEncounter():
 		get_tree().quit()
 
 func saySmth(line : String):
-	%mainText.text = line
-	%mainText.visible_characters = 0
-	while %mainText.visible_characters < line.length():
-		%mainText.visible_characters += 1
-		$textSound.stream = load("res://sfx/textSound%s.mp3" % randi_range(1,3))
-		$textSound.play()
-		if Input.is_anything_pressed():
-			return await get_tree().create_timer(0.01).timeout
-		await get_tree().create_timer(textDelay).timeout
-	return await someKeyPressed
+	if %mainText != null:
+		%mainText.text = line
+		%mainText.visible_characters = 0
+		while %mainText.visible_characters < line.length():
+			%mainText.visible_characters += 1
+			$textSound.stream = load("res://sfx/textSound%s.mp3" % randi_range(1,3))
+			$textSound.play()
+			if Input.is_anything_pressed():
+				return await get_tree().create_timer(0.01).timeout
+			await get_tree().create_timer(textDelay).timeout
+		return await someKeyPressed
 
 func hideText():
 	while %mainText.visible_characters > 0:
