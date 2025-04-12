@@ -9,7 +9,7 @@ region = Rect2(558, 624, 53, 66)
 
 [node name="skeleton" instance=ExtResource("1_xaaik")]
 maxHp = 14
-dmg = 3
+dmg = 2
 actions = Array[String](["attack", "attackAll"])
 title = "Anxiety"
 actionRepeats = 2

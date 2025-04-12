@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://dnqnqv3swvpl6" path="res://scripts/tooltipVisual.gd" id="1_dd2oh"]
 
 [node name="tooltipVisual" type="PanelContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -10000.0
+offset_right = -9630.0
+offset_bottom = 96.0
 mouse_filter = 2
 script = ExtResource("1_dd2oh")
 
